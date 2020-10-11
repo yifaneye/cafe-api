@@ -6,8 +6,8 @@ from django.db import models
 class Order(models.Model):
     detail = models.TextField()
     clientName = models.TextField()
-    price = models.FloatField()
-    isPaid = models.BooleanField(default=False)
+    price = models.FloatField(blank=True, null=True)
+    isPaid = models.BooleanField(default=False, blank=True, null=True)
     isCancelled = models.BooleanField(default=False)
 
 

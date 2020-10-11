@@ -198,14 +198,15 @@ components:
           type: string
         price:
           type: number
+          readOnly: true
         isPaid:
           type: boolean
+          readOnly: true
         isCancelled:
           type: boolean
       required:
       - detail
       - clientName
-      - price
     Payment:
       type: object
       properties:
