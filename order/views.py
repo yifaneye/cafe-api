@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 
 # Create your views here.
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
+from rest_framework.viewsets import GenericViewSet
 
 from order.models import Order, Payment, MenuItem
 from order.serializers import OrderSerializer, PaymentSerializer, MenuItemSerializer
@@ -18,6 +19,6 @@ class PaymentViewSet(viewsets.ModelViewSet):
     serializer_class = PaymentSerializer
 
 
-class MenuItemViewSet(viewsets.ModelViewSet):
+class MenuItemViewSet(mixins.ListModelMixin, GenericViewSet):
     queryset = MenuItem.objects.all()
     serializer_class = MenuItemSerializer
