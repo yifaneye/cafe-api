@@ -317,8 +317,6 @@ components:
           readOnly: true
         price:
           type: number
-        isSuccessful:
-          type: boolean
         order:
           type: integer
       required:

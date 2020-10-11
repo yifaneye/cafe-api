@@ -13,7 +13,6 @@ class Order(models.Model):
 class Payment(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE)
     price = models.FloatField()
-    isSuccessful = models.BooleanField(default=False)
 
 
 class MenuItem(models.Model):
