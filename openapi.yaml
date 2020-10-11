@@ -215,6 +215,8 @@ components:
           type: number
         isPaid:
           type: boolean
+        isCancelled:
+          type: boolean
       required:
       - detail
       - clientName
@@ -225,6 +227,9 @@ components:
         id:
           type: integer
           readOnly: true
+        detail:
+          type: string
+          nullable: true
         price:
           type: number
         order:
