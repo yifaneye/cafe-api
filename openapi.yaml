@@ -194,16 +194,19 @@ components:
           readOnly: true
         detail:
           type: string
+          description: Order detail
         clientName:
           type: string
+          description: Order client name
         price:
           type: number
-          readOnly: true
+          description: Order total price
         isPaid:
           type: boolean
-          readOnly: true
+          description: Is order paid?
         isCancelled:
           type: boolean
+          description: Is order cancelled?
       required:
       - detail
       - clientName
