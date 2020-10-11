@@ -8,7 +8,11 @@ from order.models import Order, Payment, MenuItem
 from order.serializers import OrderSerializer, PaymentSerializer, MenuItemSerializer
 
 
-class OrderViewSet(viewsets.ModelViewSet):
+class OrderViewSet(mixins.CreateModelMixin,
+                   mixins.RetrieveModelMixin,
+                   mixins.UpdateModelMixin,
+                   mixins.ListModelMixin,
+                   GenericViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 

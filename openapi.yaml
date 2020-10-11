@@ -123,21 +123,6 @@ paths:
           description: ''
       tags:
       - api
-    delete:
-      operationId: destroyOrder
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this order.
-        schema:
-          type: string
-      responses:
-        '204':
-          description: ''
-      tags:
-      - api
   /api/v1/payment/{id}/:
     get:
       operationId: retrievePayment
