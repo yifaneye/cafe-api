@@ -194,25 +194,27 @@ components:
           readOnly: true
         detail:
           type: string
+          default: 1 Latte
           description: Order detail
         clientName:
           type: string
+          default: John Doe
           description: Order client name
         price:
           type: number
           readOnly: true
+          default: '4'
           description: Order total price
         isPaid:
           type: boolean
           readOnly: true
+          default: false
           description: Is order paid?
         isCancelled:
           type: boolean
           readOnly: true
+          default: false
           description: Is order cancelled?
-      required:
-      - detail
-      - clientName
     Payment:
       type: object
       properties:
