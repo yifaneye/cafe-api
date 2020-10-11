@@ -421,11 +421,7 @@ components:
         clientName:
           type: string
         price:
-          type: string
-          format: decimal
-          multipleOf: 0.01
-          maximum: 10000000
-          minimum: -10000000
+          type: number
         isPaid:
           type: boolean
       required:
@@ -439,11 +435,7 @@ components:
           type: integer
           readOnly: true
         price:
-          type: string
-          format: decimal
-          multipleOf: 0.01
-          maximum: 10000000
-          minimum: -10000000
+          type: number
         isSuccessful:
           type: boolean
         order:
@@ -465,11 +457,7 @@ components:
           - addition
           type: string
         price:
-          type: string
-          format: decimal
-          multipleOf: 0.01
-          maximum: 10000
-          minimum: -10000
+          type: number
       required:
       - name
       - type
