@@ -221,15 +221,17 @@ components:
         id:
           type: integer
           readOnly: true
-        detail:
-          type: string
-          nullable: true
         price:
           type: number
+          default: '4'
+          description: Payment price
+        detail:
+          type: string
+          default: Cash
+          description: Payment detail
         order:
           type: integer
       required:
-      - price
       - order
     MenuItem:
       type: object
@@ -239,14 +241,16 @@ components:
           readOnly: true
         name:
           type: string
+          default: Latte
+          description: Menu Item Name
+        price:
+          type: number
+          default: '4'
+          description: Menu Item price
         type:
           enum:
           - coffee
           - addition
           type: string
-        price:
-          type: number
       required:
-      - name
       - type
-      - price
