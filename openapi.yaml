@@ -138,9 +138,29 @@ paths:
           description: ''
       tags:
       - api
-  /api/v1/payment/:
+  /api/v1/payment/{id}/:
     get:
-      operationId: listPayments
+      operationId: retrievePayment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this payment.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
+      tags:
+      - api
+  /api/v1/menu/:
+    get:
+      operationId: listMenuItems
       description: ''
       parameters: []
       responses:
@@ -150,10 +170,11 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Payment'
+                  $ref: '#/components/schemas/MenuItem'
           description: ''
       tags:
       - api
+  /api/v1/payment/:
     post:
       operationId: createPayment
       description: ''
@@ -175,117 +196,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Payment'
-          description: ''
-      tags:
-      - api
-  /api/v1/payment/{id}/:
-    get:
-      operationId: retrievePayment
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this payment.
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Payment'
-          description: ''
-      tags:
-      - api
-    put:
-      operationId: updatePayment
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this payment.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Payment'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Payment'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Payment'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Payment'
-          description: ''
-      tags:
-      - api
-    patch:
-      operationId: partialUpdatePayment
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this payment.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Payment'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Payment'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Payment'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Payment'
-          description: ''
-      tags:
-      - api
-    delete:
-      operationId: destroyPayment
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this payment.
-        schema:
-          type: string
-      responses:
-        '204':
-          description: ''
-      tags:
-      - api
-  /api/v1/menu/:
-    get:
-      operationId: listMenuItems
-      description: ''
-      parameters: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MenuItem'
           description: ''
       tags:
       - api
