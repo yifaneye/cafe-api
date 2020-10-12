@@ -1,0 +1,256 @@
+{
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "paths": {
+    "/menu/": {
+      "get": {
+        "operationId": "listMenuItems",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MenuItem"
+              }
+            }
+          }
+        },
+        "tags": [
+          "menu"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/orders/": {
+      "get": {
+        "operationId": "listOrders",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Order"
+              }
+            }
+          }
+        },
+        "tags": [
+          "orders"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/order/{id}": {
+      "get": {
+        "operationId": "retrieveOrder",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "A unique integer value identifying this order.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        },
+        "tags": [
+          "order"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "operationId": "updateOrder",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "A unique integer value identifying this order.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        },
+        "tags": [
+          "order"
+        ],
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "operationId": "partialUpdateOrder",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "A unique integer value identifying this order.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        },
+        "tags": [
+          "order"
+        ],
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "operationId": "destroyOrder",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "A unique integer value identifying this order.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "order"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0",
+  "definitions": {
+    "MenuItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "default": "Latte",
+          "description": "Menu item name (coffee or addition)"
+        },
+        "type": {
+          "enum": [
+            "coffee",
+            "addition"
+          ],
+          "type": "string",
+          "default": "coffee",
+          "description": "Menu item type (either coffee or addition)"
+        },
+        "price": {
+          "type": "number",
+          "default": "4",
+          "description": "Menu item price"
+        }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "detail": {
+          "type": "string",
+          "default": "1 Latte",
+          "description": "Order detail (coffee and additions)"
+        },
+        "clientName": {
+          "type": "string",
+          "default": "John Doe",
+          "description": "Order customer name"
+        },
+        "price": {
+          "type": "number",
+          "default": "5",
+          "description": "Order total price"
+        },
+        "status": {
+          "enum": [
+            "unpaid",
+            "cancelled",
+            "paid",
+            "finished"
+          ],
+          "type": "string",
+          "default": "unpaid",
+          "description": "Order status (one of unpaid, cancelled, paid or finished)"
+        },
+        "paymentDetail": {
+          "type": "string",
+          "default": "Cash",
+          "description": "Order payment detail (Payment method and change"
+        }
+      }
+    }
+  },
+  "x-components": {}
+}
