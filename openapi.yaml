@@ -150,27 +150,27 @@ components:
         detail:
           type: string
           default: 1 Latte
-          description: Order detail
+          description: Order detail (coffee and additions)
         clientName:
           type: string
           default: John Doe
-          description: Order client name
+          description: Order customer name
         price:
           type: number
-          default: '4'
+          default: '5'
           description: Order total price
         isPaid:
           type: boolean
           default: false
-          description: Is order paid?
+          description: Has customer paid?
         paymentDetail:
           type: string
           default: Cash
-          description: Order payment detail
+          description: Order payment detail (Payment method and change
         isCancelled:
           type: boolean
           default: false
-          description: Is order cancelled?
+          description: Has order been cancelled?
     MenuItem:
       type: object
       properties:
@@ -180,11 +180,11 @@ components:
         name:
           type: string
           default: Latte
-          description: Menu Item Name
+          description: Menu item name (coffee or addition)
         price:
           type: number
           default: '4'
-          description: Menu Item price
+          description: Menu item price
         type:
           enum:
           - coffee
