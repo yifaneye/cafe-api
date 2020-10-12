@@ -1,6 +1,17 @@
 info:
-  title: ''
-  version: ''
+  title: 'Coffee Shop API'
+  description: 'This is a Coffee Shop API used by cashiers and baristas'
+  version: '1'
+securityDefinitions:
+  basicAuth:
+    type: basic
+security:
+  - basicAuth: []
+schemes:
+  - http
+  - https
+host: "localhost:8000"
+basePath: '/'
 paths:
   /menu:
     get:
