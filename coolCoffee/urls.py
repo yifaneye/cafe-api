@@ -20,10 +20,12 @@ from rest_framework import routers
 import order.views
 
 router = routers.DefaultRouter()
-router.register(r'order', order.views.OrderViewSet)
+
 router.register(r'menu', order.views.MenuItemViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include(router.urls)),
+    path('/', include(router.urls)),
+    path('orders/', order.views.OrderListView.as_view()),
+    path('order/<int:id>', order.views.OrderViewSet.as_view()),
 ]

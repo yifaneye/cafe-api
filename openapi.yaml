@@ -3,7 +3,23 @@ info:
   title: ''
   version: ''
 paths:
-  /api/v1/order/:
+  /menu/:
+    get:
+      operationId: listMenuItems
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuItem'
+          description: ''
+      tags:
+      - menu
+  /orders/:
     get:
       operationId: listOrders
       description: ''
@@ -18,32 +34,8 @@ paths:
                   $ref: '#/components/schemas/Order'
           description: ''
       tags:
-      - api
-    post:
-      operationId: createOrder
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Order'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Order'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Order'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Order'
-          description: ''
-      tags:
-      - api
-  /api/v1/order/{id}/:
+      - orders
+  /order/{id}:
     get:
       operationId: retrieveOrder
       description: ''
@@ -62,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
       tags:
-      - api
+      - order
     put:
       operationId: updateOrder
       description: ''
@@ -92,7 +84,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
       tags:
-      - api
+      - order
     patch:
       operationId: partialUpdateOrder
       description: ''
@@ -122,25 +114,45 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
       tags:
-      - api
-  /api/v1/menu/:
-    get:
-      operationId: listMenuItems
+      - order
+    delete:
+      operationId: destroyOrder
       description: ''
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this order.
+        schema:
+          type: string
       responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/MenuItem'
+        '204':
           description: ''
       tags:
-      - api
+      - order
 components:
   schemas:
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          default: Latte
+          description: Menu item name (coffee or addition)
+        type:
+          enum:
+          - coffee
+          - addition
+          type: string
+          default: coffee
+          description: Menu item type (either coffee or addition)
+        price:
+          type: number
+          default: '4'
+          description: Menu item price
     Order:
       type: object
       properties:
@@ -172,28 +184,3 @@ components:
           type: string
           default: Cash
           description: Order payment detail (Payment method and change
-        isCancelled:
-          type: boolean
-          default: false
-          description: Has order been cancelled?
-    MenuItem:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          default: Latte
-          description: Menu item name (coffee or addition)
-        type:
-          enum:
-          - coffee
-          - addition
-          type: string
-          default: coffee
-          description: Menu item type (either coffee or addition)
-        price:
-          type: number
-          default: '4'
-          description: Menu item price

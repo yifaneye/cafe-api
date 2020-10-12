@@ -9,7 +9,6 @@ class OrderSerializer(serializers.ModelSerializer):
     price = serializers.FloatField(initial='5', default='5', help_text='Order total price')
     status = serializers.ChoiceField(initial='unpaid', default='unpaid', choices=Order.ORDER_STATUS_CHOICES, help_text='Order status (one of unpaid, cancelled, paid or finished)')
     paymentDetail = serializers.CharField(initial='Cash', default='Cash', help_text='Order payment detail (Payment method and change')
-    isCancelled = serializers.BooleanField(initial=False, default=False, help_text='Has order been cancelled?')
 
     class Meta:
         model = Order
