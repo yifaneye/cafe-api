@@ -151,18 +151,18 @@ definitions:
         readOnly: true
       name:
         type: string
-        default: Latte
+        example: Latte
         description: Menu item name (coffee or addition)
       type:
         enum:
           - coffee
           - addition
         type: string
-        default: coffee
+        example: coffee
         description: Menu item type (either coffee or addition)
       price:
         type: number
-        default: '4'
+        example: '4'
         description: Menu item price
   Order:
     type: object
@@ -172,15 +172,15 @@ definitions:
         readOnly: true
       detail:
         type: string
-        default: 1 Latte
+        example: 1 Latte
         description: Order detail (coffee and additions)
       clientName:
         type: string
-        default: John Doe
+        example: John Doe
         description: Order customer name
       price:
         type: number
-        default: '5'
+        example: '5'
         description: Order total price
       status:
         enum:
@@ -189,10 +189,10 @@ definitions:
           - paid
           - finished
         type: string
-        default: unpaid
+        example: unpaid
         description: 'Order status (one of unpaid, cancelled, paid or finished)'
       paymentDetail:
         type: string
-        default: Cash
+        example: Cash
         description: Order payment detail (Payment method and change
 x-components: {}
