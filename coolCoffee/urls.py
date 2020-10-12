@@ -21,7 +21,6 @@ import order.views
 
 router = routers.DefaultRouter()
 router.register(r'order', order.views.OrderViewSet)
-router.register(r'payment', order.views.PaymentViewSet)
 router.register(r'menu', order.views.MenuItemViewSet)
 
 urlpatterns = [

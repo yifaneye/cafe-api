@@ -4,8 +4,8 @@ from django.shortcuts import render
 from rest_framework import viewsets, mixins
 from rest_framework.viewsets import GenericViewSet
 
-from order.models import Order, Payment, MenuItem
-from order.serializers import OrderSerializer, PaymentSerializer, MenuItemSerializer
+from order.models import Order, MenuItem
+from order.serializers import OrderSerializer, MenuItemSerializer
 
 
 class OrderViewSet(mixins.CreateModelMixin,
@@ -15,13 +15,6 @@ class OrderViewSet(mixins.CreateModelMixin,
                    GenericViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-
-
-class PaymentViewSet(mixins.CreateModelMixin,
-                     mixins.RetrieveModelMixin,
-                     GenericViewSet):
-    queryset = Payment.objects.all()
-    serializer_class = PaymentSerializer
 
 
 class MenuItemViewSet(mixins.ListModelMixin, GenericViewSet):

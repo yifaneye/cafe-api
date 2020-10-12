@@ -123,26 +123,6 @@ paths:
           description: ''
       tags:
       - api
-  /api/v1/payment/{id}/:
-    get:
-      operationId: retrievePayment
-      description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this payment.
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Payment'
-          description: ''
-      tags:
-      - api
   /api/v1/menu/:
     get:
       operationId: listMenuItems
@@ -156,31 +136,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/MenuItem'
-          description: ''
-      tags:
-      - api
-  /api/v1/payment/:
-    post:
-      operationId: createPayment
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Payment'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Payment'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Payment'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Payment'
           description: ''
       tags:
       - api
@@ -202,37 +157,20 @@ components:
           description: Order client name
         price:
           type: number
-          readOnly: true
           default: '4'
           description: Order total price
         isPaid:
           type: boolean
-          readOnly: true
           default: false
           description: Is order paid?
-        isCancelled:
-          type: boolean
-          readOnly: true
-          default: false
-          description: Is order cancelled?
-    Payment:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        price:
-          type: number
-          default: '4'
-          description: Payment price
-        detail:
+        paymentDetail:
           type: string
           default: Cash
-          description: Payment detail
-        order:
-          type: integer
-      required:
-      - order
+          description: Order payment detail
+        isCancelled:
+          type: boolean
+          default: false
+          description: Is order cancelled?
     MenuItem:
       type: object
       properties:
