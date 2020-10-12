@@ -3,7 +3,7 @@ info:
   title: ''
   version: ''
 paths:
-  /menu/:
+  /menu:
     get:
       operationId: listMenuItems
       description: ''
@@ -19,7 +19,7 @@ paths:
           description: ''
       tags:
       - menu
-  /orders/:
+  /orders:
     get:
       operationId: listOrders
       description: ''
@@ -127,6 +127,31 @@ paths:
           type: string
       responses:
         '204':
+          description: ''
+      tags:
+      - order
+  /order:
+    post:
+      operationId: createOrder
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
           description: ''
       tags:
       - order
