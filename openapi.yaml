@@ -159,10 +159,15 @@ components:
           type: number
           default: '5'
           description: Order total price
-        isPaid:
-          type: boolean
-          default: false
-          description: Has customer paid?
+        status:
+          enum:
+          - unpaid
+          - cancelled
+          - paid
+          - finished
+          type: string
+          default: unpaid
+          description: Order status (one of unpaid, cancelled, paid or finished)
         paymentDetail:
           type: string
           default: Cash
@@ -181,14 +186,14 @@ components:
           type: string
           default: Latte
           description: Menu item name (coffee or addition)
-        price:
-          type: number
-          default: '4'
-          description: Menu item price
         type:
           enum:
           - coffee
           - addition
           type: string
-      required:
-      - type
+          default: coffee
+          description: Menu item type (either coffee or addition)
+        price:
+          type: number
+          default: '4'
+          description: Menu item price
