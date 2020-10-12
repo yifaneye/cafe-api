@@ -4,7 +4,7 @@
     "version": ""
   },
   "paths": {
-    "/menu/": {
+    "/menu": {
       "get": {
         "operationId": "listMenuItems",
         "description": "",
@@ -28,7 +28,7 @@
         ]
       }
     },
-    "/orders/": {
+    "/orders": {
       "get": {
         "operationId": "listOrders",
         "description": "",
@@ -177,6 +177,40 @@
         },
         "tags": [
           "order"
+        ]
+      }
+    },
+    "/order": {
+      "post": {
+        "operationId": "createOrder",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        },
+        "tags": [
+          "order"
+        ],
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
         ]
       }
     }
