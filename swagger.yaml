@@ -13,6 +13,27 @@ schemes:
 host: "cafe.yifanai.com"
 basePath: '/v1'
 paths:
+  /:
+    get:
+      operationId: listLinks
+      description: 'List available links'
+      parameters: []
+      responses:
+        '200':
+          description: Successfully retrieved
+          schema:
+            type: object
+            properties:
+              list_menu_items:
+                $ref: '#/definitions/get_menu'
+              create_an_order:
+                $ref: '#/definitions/orders'
+        '400':
+          description: Bad request
+      tags:
+        - api
+      produces:
+        - application/json
   /menu:
     get:
       operationId: listMenuItems
@@ -289,7 +310,7 @@ definitions:
           - finished
         type: string
         example: unpaid
-        description: 'Order status (one of unpaid, cancelled, paid or finished)'
+        description: Order status (one of unpaid, cancelled, paid or finished)
       paymentDetail:
         type: string
         example: Cash
@@ -298,15 +319,15 @@ definitions:
     type: string
     format: uri
     x-nullable: true
-    example: '/menu'
+    example: '/v1/menu'
   orders:
     type: string
     format: uri
     x-nullable: true
-    example: '/orders'
+    example: '/v1/orders'
   specific_order:
     type: string
     format: uri
     x-nullable: true
-    example: '/orders/1'
+    example: '/v1/orders/1'
 x-components: {}
