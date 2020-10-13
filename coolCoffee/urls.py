@@ -19,16 +19,16 @@ from rest_framework import routers
 
 import order.views
 
-# router = routers.DefaultRouter()
-#
-# router.register(r'menu', order.views.MenuItemViewSet)
+router = routers.DefaultRouter()
+router.register(r'orders', order.views.OrderViewSet)
+router.register(r'menu', order.views.MenuViewSet)
 
 urlpatterns = [
     path('d5E0-qW39-ZKX9-6lh3-H2Mf-n7w1/', admin.site.urls),
-    # path('', include(router.urls)),
-    path('v1/', order.views.base_view),
-    path('v1/menu', order.views.MenuItemViewSet.as_view()),
-    path('v1/orders', order.views.OrderListView.as_view()),
-    path('v1/orders', order.views.OrderCreateView.as_view()),
-    path('v1/orders/<int:id>', order.views.OrderViewSet.as_view()),
+    path('v1/', include(router.urls)),
+    # path('v1', order.views.base_view),
+    # path('v1/menu', order.views.MenuItemViewSet.as_view()),
+    # path('v1/orders', order.views.OrderListView.as_view()),
+    # path('v1/orders', order.views.OrderCreateView.as_view()),
+    # path('v1/orders/<int:id>', order.views.OrderViewSet.as_view()),
 ]
