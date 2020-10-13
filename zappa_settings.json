@@ -5,6 +5,7 @@
         "profile_name": "eb-cli",
         "project_name": "coolcoffee",
         "runtime": "python3.8",
-        "s3_bucket": "zappa-2pusknqcp"
+        "s3_bucket": "zappa-2pusknqcp",
+        "use_precompiled_packages": false
     }
 }
