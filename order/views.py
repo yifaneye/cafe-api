@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
 # Create your views here.
 from rest_framework import viewsets, mixins
@@ -8,6 +9,13 @@ from rest_framework.viewsets import GenericViewSet
 
 from order.models import Order, MenuItem
 from order.serializers import OrderSerializer, MenuItemSerializer
+
+
+def base_view(_):
+    return JsonResponse({
+        "list_menu_items": "/v1/menu",
+        "create_an_order": "/v1/orders"
+    })
 
 
 class OrderListView(ListAPIView):
