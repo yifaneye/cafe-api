@@ -20,7 +20,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: ''
+          description: Successfully listed
           schema:
             type: array
             items:
@@ -36,7 +36,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: ''
+          description: Successfully listed
           schema:
             type: array
             items:
@@ -57,7 +57,7 @@ paths:
           type: string
       responses:
         '200':
-          description: ''
+          description: Successfully retrieved
           schema:
             $ref: '#/definitions/Order'
       tags:
@@ -79,7 +79,7 @@ paths:
             $ref: '#/definitions/Order'
       responses:
         '200':
-          description: ''
+          description: Successfully updated
           schema:
             $ref: '#/definitions/Order'
       tags:
@@ -105,7 +105,7 @@ paths:
             $ref: '#/definitions/Order'
       responses:
         '200':
-          description: ''
+          description: Successfully updated
           schema:
             $ref: '#/definitions/Order'
       tags:
@@ -127,7 +127,7 @@ paths:
           type: string
       responses:
         '204':
-          description: ''
+          description: Successfully deleted
       tags:
         - order
   /order:
@@ -141,7 +141,7 @@ paths:
             $ref: '#/definitions/Order'
       responses:
         '201':
-          description: ''
+          description: Successfully created
           schema:
             $ref: '#/definitions/Order'
       tags:
