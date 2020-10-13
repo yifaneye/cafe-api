@@ -1,7 +1,7 @@
 info:
   title: 'Coffee Shop API'
   description: 'This is a Coffee Shop API used by cashiers and baristas'
-  version: '1'
+  version: '1.0.1'
 securityDefinitions:
   basicAuth:
     type: basic
@@ -10,8 +10,8 @@ security:
 schemes:
   - http
   - https
-host: "localhost:8000"
-basePath: '/'
+host: "cafe.yifanai.com"
+basePath: '/v1'
 paths:
   /menu:
     get:
@@ -49,7 +49,30 @@ paths:
         - orders
       produces:
         - application/json
-  '/order/{id}':
+    post:
+      operationId: createOrder
+      description: 'Create an order'
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '201':
+          description: Successfully created
+          schema:
+            $ref: '#/definitions/Order'
+        '400':
+          description: Bad request (Invalid input)
+      tags:
+        - order
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+        - multipart/form-data
+      produces:
+        - application/json
+  '/orders/{id}':
     get:
       operationId: retrieveOrder
       description: 'Retrieve an order by id'
@@ -150,30 +173,6 @@ paths:
           description: Order not found
       tags:
         - order
-  /order:
-    post:
-      operationId: createOrder
-      description: 'Create an order'
-      parameters:
-        - name: body
-          in: body
-          schema:
-            $ref: '#/definitions/Order'
-      responses:
-        '201':
-          description: Successfully created
-          schema:
-            $ref: '#/definitions/Order'
-        '400':
-          description: Bad request (Invalid input)
-      tags:
-        - order
-      consumes:
-        - application/json
-        - application/x-www-form-urlencoded
-        - multipart/form-data
-      produces:
-        - application/json
 swagger: '2.0'
 definitions:
   MenuItem:

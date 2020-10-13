@@ -26,8 +26,8 @@ import order.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include(router.urls)),
-    path('menu', order.views.MenuItemViewSet.as_view()),
-    path('orders', order.views.OrderListView.as_view()),
-    path('order', order.views.OrderCreateView.as_view()),
-    path('order/<int:id>', order.views.OrderViewSet.as_view()),
+    path('v1/menu', order.views.MenuItemViewSet.as_view()),
+    path('v1/orders', order.views.OrderListView.as_view()),
+    path('v1/orders', order.views.OrderCreateView.as_view()),
+    path('v1/orders/<int:id>', order.views.OrderViewSet.as_view()),
 ]
