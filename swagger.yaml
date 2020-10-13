@@ -22,7 +22,10 @@ paths:
         '200':
           description: Successfully listed
           schema:
-            type: array
+            type: object
+            properties:
+              create_a_new_order:
+                $ref: '#/definitions/orders'
             items:
               $ref: '#/definitions/MenuItem'
         '400':
@@ -40,9 +43,14 @@ paths:
         '200':
           description: Successfully listed
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Order'
+            type: object
+            properties:
+              create_an_order:
+                $ref: '#/definitions/orders'
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/Order'
         '400':
           description: Bad request
       tags:
@@ -61,7 +69,16 @@ paths:
         '201':
           description: Successfully created
           schema:
-            $ref: '#/definitions/Order'
+            type: object
+            properties:
+              create_a_new_order:
+                $ref: '#/definitions/orders'
+              update_this_order:
+                $ref: '#/definitions/specific_order'
+              cancel_this_order:
+                $ref: '#/definitions/specific_order'
+              item:
+                $ref: '#/definitions/Order'
         '400':
           description: Bad request (Invalid input)
       tags:
@@ -86,7 +103,16 @@ paths:
         '200':
           description: Successfully retrieved
           schema:
-            $ref: '#/definitions/Order'
+            type: object
+            properties:
+              create_a_new_order:
+                $ref: '#/definitions/orders'
+              update_this_order:
+                $ref: '#/definitions/specific_order'
+              cancel_this_order:
+                $ref: '#/definitions/specific_order'
+              item:
+                $ref: '#/definitions/Order'
         '400':
           description: Bad request (Invalid id)
         '404':
@@ -112,7 +138,16 @@ paths:
         '200':
           description: Successfully updated
           schema:
-            $ref: '#/definitions/Order'
+            type: object
+            properties:
+              create_a_new_order:
+                $ref: '#/definitions/orders'
+              update_this_order:
+                $ref: '#/definitions/specific_order'
+              cancel_this_order:
+                $ref: '#/definitions/specific_order'
+              item:
+                $ref: '#/definitions/Order'
         '400':
           description: Bad request (Invalid input)
         '404':
@@ -142,7 +177,16 @@ paths:
         '200':
           description: Successfully updated
           schema:
-            $ref: '#/definitions/Order'
+            type: object
+            properties:
+              create_a_new_order:
+                $ref: '#/definitions/orders'
+              update_this_order:
+                $ref: '#/definitions/specific_order'
+              cancel_this_order:
+                $ref: '#/definitions/specific_order'
+              item:
+                $ref: '#/definitions/Order'
         '400':
           description: Bad request (Invalid input)
         '404':
@@ -167,6 +211,11 @@ paths:
       responses:
         '204':
           description: Successfully deleted
+          schema:
+            type: object
+            properties:
+              create_a_new_order:
+                $ref: '#/definitions/orders'
         '400':
           description: Bad request (Invalid id)
         '404':
@@ -227,4 +276,19 @@ definitions:
         type: string
         example: Cash
         description: Order payment detail (Payment method and change)
+  get_menu:
+    type: string
+    format: uri
+    x-nullable: true
+    example: '/menu'
+  orders:
+    type: string
+    format: uri
+    x-nullable: true
+    example: '/orders'
+  specific_order:
+    type: string
+    format: uri
+    x-nullable: true
+    example: '/orders/1'
 x-components: {}
