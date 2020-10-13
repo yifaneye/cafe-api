@@ -17,7 +17,15 @@ paths:
     get:
       operationId: listMenuItems
       description: 'List all menu items'
-      parameters: []
+      parameters:
+        - description: type
+          enum:
+            - coffee
+            - addition
+          in: query
+          name: type
+          required: false
+          type: string
       responses:
         '200':
           description: Successfully listed
@@ -38,7 +46,17 @@ paths:
     get:
       operationId: listOrders
       description: 'List all orders'
-      parameters: []
+      parameters:
+        - description: Order status filter (One of unpaid, cancelled, paid, finished)
+          enum:
+            - unpaid
+            - cancelled
+            - paid
+            - finished
+          in: query
+          name: status
+          required: false
+          type: string
       responses:
         '200':
           description: Successfully listed
