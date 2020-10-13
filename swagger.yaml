@@ -25,6 +25,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/MenuItem'
+        '400':
+          description: Bad request
       tags:
         - menu
       produces:
@@ -41,6 +43,8 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Order'
+        '400':
+          description: Bad request
       tags:
         - orders
       produces:
@@ -60,6 +64,10 @@ paths:
           description: Successfully retrieved
           schema:
             $ref: '#/definitions/Order'
+        '400':
+          description: Bad request (Invalid id)
+        '404':
+          description: Order not found
       tags:
         - order
       produces:
@@ -82,6 +90,10 @@ paths:
           description: Successfully updated
           schema:
             $ref: '#/definitions/Order'
+        '400':
+          description: Bad request (Invalid input)
+        '404':
+          description: Order not found
       tags:
         - order
       consumes:
@@ -108,6 +120,10 @@ paths:
           description: Successfully updated
           schema:
             $ref: '#/definitions/Order'
+        '400':
+          description: Bad request (Invalid input)
+        '404':
+          description: Order not found
       tags:
         - order
       consumes:
@@ -128,6 +144,10 @@ paths:
       responses:
         '204':
           description: Successfully deleted
+        '400':
+          description: Bad request (Invalid id)
+        '404':
+          description: Order not found
       tags:
         - order
   /order:
@@ -144,6 +164,8 @@ paths:
           description: Successfully created
           schema:
             $ref: '#/definitions/Order'
+        '400':
+          description: Bad request (Invalid input)
       tags:
         - order
       consumes:
