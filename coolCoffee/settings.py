@@ -25,7 +25,7 @@ SECRET_KEY = 'zi5stck!nag1+8%63*13cf2ry=ru61-53cg#bi*34h+!ufft6!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cafe.yifanai.com', 'ay7dwg2yz5.execute-api.ap-southeast-2.amazonaws.com', '127.0.0.1']
 
 
 # Application definition
@@ -123,3 +123,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}
+
+CORS_ORIGIN_ALLOW_ALL = DEBUG
