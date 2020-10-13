@@ -3,11 +3,20 @@ info:
   title: ''
   version: ''
 paths:
-  /menu:
+  /v1/menu:
     get:
       operationId: listMenuItems
       description: ''
-      parameters: []
+      parameters:
+      - name: type
+        required: false
+        in: query
+        description: type
+        schema:
+          type: string
+          enum:
+          - coffee
+          - addition
       responses:
         '200':
           content:
@@ -18,12 +27,23 @@ paths:
                   $ref: '#/components/schemas/MenuItem'
           description: ''
       tags:
-      - menu
-  /orders:
+      - v1
+  /v1/orders:
     get:
       operationId: listOrders
       description: ''
-      parameters: []
+      parameters:
+      - name: status
+        required: false
+        in: query
+        description: status
+        schema:
+          type: string
+          enum:
+          - unpaid
+          - cancelled
+          - paid
+          - finished
       responses:
         '200':
           content:
@@ -34,8 +54,32 @@ paths:
                   $ref: '#/components/schemas/Order'
           description: ''
       tags:
-      - orders
-  /order/{id}:
+      - v1
+    post:
+      operationId: createOrder
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Order'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+      tags:
+      - v1
+  /v1/orders/{id}:
     get:
       operationId: retrieveOrder
       description: ''
@@ -54,7 +98,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
       tags:
-      - order
+      - v1
     put:
       operationId: updateOrder
       description: ''
@@ -84,7 +128,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
       tags:
-      - order
+      - v1
     patch:
       operationId: partialUpdateOrder
       description: ''
@@ -114,7 +158,7 @@ paths:
                 $ref: '#/components/schemas/Order'
           description: ''
       tags:
-      - order
+      - v1
     delete:
       operationId: destroyOrder
       description: ''
@@ -129,32 +173,7 @@ paths:
         '204':
           description: ''
       tags:
-      - order
-  /order:
-    post:
-      operationId: createOrder
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Order'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Order'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Order'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Order'
-          description: ''
-      tags:
-      - order
+      - v1
 components:
   schemas:
     MenuItem:

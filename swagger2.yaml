@@ -1,0 +1,216 @@
+swagger: '2.0'
+info:
+  title: ''
+  version: ''
+paths:
+  /v1/menu:
+    get:
+      produces:
+        - application/json
+      parameters:
+        - description: type
+          enum:
+            - coffee
+            - addition
+          in: query
+          name: type
+          required: false
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/MenuItem'
+            type: array
+      tags:
+        - v1
+      description: ''
+      operationId: listMenuItems
+  /v1/orders:
+    get:
+      produces:
+        - application/json
+      parameters:
+        - description: status
+          enum:
+            - unpaid
+            - cancelled
+            - paid
+            - finished
+          in: query
+          name: status
+          required: false
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Order'
+            type: array
+      tags:
+        - v1
+      description: ''
+      operationId: listOrders
+    post:
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - v1
+      description: ''
+      operationId: createOrder
+  '/v1/orders/{id}':
+    delete:
+      parameters:
+        - description: A unique integer value identifying this order.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+        - v1
+      description: ''
+      operationId: destroyOrder
+    get:
+      produces:
+        - application/json
+      parameters:
+        - description: A unique integer value identifying this order.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - v1
+      description: ''
+      operationId: retrieveOrder
+    patch:
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - description: A unique integer value identifying this order.
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - v1
+      description: ''
+      operationId: partialUpdateOrder
+    put:
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - description: A unique integer value identifying this order.
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Order'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Order'
+      tags:
+        - v1
+      description: ''
+      operationId: updateOrder
+definitions:
+  MenuItem:
+    properties:
+      id:
+        readOnly: true
+        type: integer
+      name:
+        default: Latte
+        description: Menu item name (coffee or addition)
+        type: string
+      price:
+        default: '4'
+        description: Menu item price
+        type: number
+      type:
+        default: coffee
+        description: Menu item type (either coffee or addition)
+        enum:
+          - coffee
+          - addition
+        type: string
+    type: object
+  Order:
+    properties:
+      clientName:
+        default: John Doe
+        description: Order customer name
+        type: string
+      detail:
+        default: 1 Latte
+        description: Order detail (coffee and additions)
+        type: string
+      id:
+        readOnly: true
+        type: integer
+      paymentDetail:
+        default: Cash
+        description: Order payment detail (Payment method and change
+        type: string
+      price:
+        default: '5'
+        description: Order total price
+        type: number
+      status:
+        default: unpaid
+        description: 'Order status (one of unpaid, cancelled, paid or finished)'
+        enum:
+          - unpaid
+          - cancelled
+          - paid
+          - finished
+        type: string
+    type: object
+x-components: {}
+
