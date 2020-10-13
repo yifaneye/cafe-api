@@ -16,7 +16,7 @@ paths:
   /menu:
     get:
       operationId: listMenuItems
-      description: ''
+      description: 'List all menu items'
       parameters: []
       responses:
         '200':
@@ -32,7 +32,7 @@ paths:
   /orders:
     get:
       operationId: listOrders
-      description: ''
+      description: 'List all orders'
       parameters: []
       responses:
         '200':
@@ -48,7 +48,7 @@ paths:
   '/order/{id}':
     get:
       operationId: retrieveOrder
-      description: ''
+      description: 'Retrieve an order by id'
       parameters:
         - name: id
           in: path
@@ -66,7 +66,7 @@ paths:
         - application/json
     put:
       operationId: updateOrder
-      description: ''
+      description: 'Update an order by id'
       parameters:
         - name: id
           in: path
@@ -92,7 +92,7 @@ paths:
         - application/json
     patch:
       operationId: partialUpdateOrder
-      description: ''
+      description: 'Partial update an order by id'
       parameters:
         - name: id
           in: path
@@ -118,7 +118,7 @@ paths:
         - application/json
     delete:
       operationId: destroyOrder
-      description: ''
+      description: 'Delete an order by id'
       parameters:
         - name: id
           in: path
@@ -133,7 +133,7 @@ paths:
   /order:
     post:
       operationId: createOrder
-      description: ''
+      description: 'Create an order'
       parameters:
         - name: body
           in: body
@@ -205,5 +205,5 @@ definitions:
       paymentDetail:
         type: string
         example: Cash
-        description: Order payment detail (Payment method and change
+        description: Order payment detail (Payment method and change)
 x-components: {}
