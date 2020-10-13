@@ -1,43 +1,45 @@
+swagger: '2.0'
 info:
   title: 'Coffee Shop API'
   description: 'This is a Coffee Shop API used by cashiers and baristas'
-  version: '1.0.1'
+  version: '1.0.2'
 securityDefinitions:
   basicAuth:
     type: basic
 security:
   - basicAuth: []
 schemes:
-  - http
   - https
-host: "cafe.yifanai.com"
+host: 'cafe.yifanai.com'
 basePath: '/v1'
 paths:
   /:
     get:
       operationId: listLinks
-      description: 'List available links'
+      description: List all links
       parameters: []
       responses:
         '200':
-          description: Successfully retrieved
+          description: Links retrieved successfully
           schema:
             type: object
             properties:
               list_menu_items:
-                $ref: '#/definitions/get_menu'
-              create_an_order:
-                $ref: '#/definitions/orders'
+                $ref: '#/definitions/menu_link'
+              place_an_order:
+                $ref: '#/definitions/orders_link'
         '400':
           description: Bad request
+        '405':
+          description: Not allowed HTTP method is used
       tags:
-        - api
+        - Links
       produces:
         - application/json
   /menu:
     get:
       operationId: listMenuItems
-      description: 'List all menu items'
+      description: List all menu items (Listing types of coffees & additions)
       parameters:
         - description: type
           enum:
@@ -49,56 +51,50 @@ paths:
           type: string
       responses:
         '200':
-          description: Successfully listed
+          description: Menu listed successfully
           schema:
             type: object
             properties:
-              create_a_new_order:
-                $ref: '#/definitions/orders'
+              place_an_order:
+                $ref: '#/definitions/orders_link'
             items:
               $ref: '#/definitions/MenuItem'
         '400':
           description: Bad request
+        '405':
+          description: Not allowed HTTP method is used
       tags:
-        - menu
+        - Menu
       produces:
         - application/json
   /orders:
     get:
       operationId: listOrders
-      description: 'List all orders'
-      parameters:
-        - description: Order status filter (One of unpaid, cancelled, paid, finished)
-          enum:
-            - unpaid
-            - cancelled
-            - paid
-            - finished
-          in: query
-          name: status
-          required: false
-          type: string
+      description: List all orders
+      parameters: []
       responses:
         '200':
-          description: Successfully listed
+          description: Orders listed successfully
           schema:
             type: object
             properties:
-              create_an_order:
-                $ref: '#/definitions/orders'
+              lookup_an_order:
+                $ref: '#/definitions/order_link'
               results:
                 type: array
                 items:
                   $ref: '#/definitions/Order'
         '400':
           description: Bad request
+        '405':
+          description: Not allowed HTTP method is used
       tags:
-        - orders
+        - Orders
       produces:
         - application/json
     post:
       operationId: createOrder
-      description: 'Create an order'
+      description: Create (place) an order
       parameters:
         - name: body
           in: body
@@ -106,173 +102,182 @@ paths:
             $ref: '#/definitions/Order'
       responses:
         '201':
-          description: Successfully created
+          description: Order created successfully
           schema:
             type: object
             properties:
-              create_a_new_order:
-                $ref: '#/definitions/orders'
               update_this_order:
-                $ref: '#/definitions/specific_order'
+                $ref: '#/definitions/order_link'
+              update_payment_for_this_order:
+                $ref: '#/definitions/order_link'
               cancel_this_order:
-                $ref: '#/definitions/specific_order'
+                $ref: '#/definitions/order_link'
               item:
                 $ref: '#/definitions/Order'
         '400':
-          description: Bad request (Invalid input)
+          description: Bad request (invalid order data)
+        '405':
+          description: Not allowed HTTP method is used
       tags:
-        - order
+        - Order
       consumes:
         - application/json
-        - application/x-www-form-urlencoded
-        - multipart/form-data
       produces:
         - application/json
   '/orders/{id}':
     get:
       operationId: retrieveOrder
-      description: 'Retrieve an order by id'
+      description: Retrieve (lookup) an order by id
       parameters:
         - name: id
           in: path
           required: true
-          description: A unique integer value identifying this order.
+          description: order ID
           type: string
       responses:
         '200':
-          description: Successfully retrieved
+          description: Order retrieved successfully
           schema:
             type: object
             properties:
-              create_a_new_order:
-                $ref: '#/definitions/orders'
               update_this_order:
-                $ref: '#/definitions/specific_order'
-              cancel_this_order:
-                $ref: '#/definitions/specific_order'
+                $ref: '#/definitions/order_link'
               item:
                 $ref: '#/definitions/Order'
         '400':
-          description: Bad request (Invalid id)
+          description: Bad request (invalid order id)
         '404':
-          description: Order not found
+          description: Order with the provided ID is not found
+        '405':
+          description: Not allowed HTTP method is used
       tags:
-        - order
+        - Order
       produces:
         - application/json
     put:
       operationId: updateOrder
-      description: 'Update an order by id'
+      description: Update an order by order ID (for amending an order, canceling an order, updating payment information for an order)
       parameters:
         - name: id
+          type: string
           in: path
           required: true
-          description: A unique integer value identifying this order.
-          type: string
+          description: order ID
         - name: body
           in: body
           schema:
             $ref: '#/definitions/Order'
       responses:
         '200':
-          description: Successfully updated
+          description: Order updated successfully
           schema:
             type: object
             properties:
-              create_a_new_order:
-                $ref: '#/definitions/orders'
+              place_a_new_order:
+                $ref: '#/definitions/orders_link'
               update_this_order:
-                $ref: '#/definitions/specific_order'
+                $ref: '#/definitions/order_link'
+              update_payment_for_this_order:
+                $ref: '#/definitions/order_link'
               cancel_this_order:
-                $ref: '#/definitions/specific_order'
+                $ref: '#/definitions/order_link'
+              lookup_next_order:
+                $ref: '#/definitions/orders_link'
               item:
                 $ref: '#/definitions/Order'
         '400':
-          description: Bad request (Invalid input)
+          description: Bad request (invalid order data)
         '404':
-          description: Order not found
+          description: Order with the provided ID is not found
+        '405':
+          description: Not allowed HTTP method is used
       tags:
-        - order
+        - Order
       consumes:
         - application/json
-        - application/x-www-form-urlencoded
-        - multipart/form-data
       produces:
         - application/json
     patch:
       operationId: partialUpdateOrder
-      description: 'Partial update an order by id'
+      description: Partial update an order by order ID (for amending an order, canceling an order, updating payment information for an order)
       parameters:
         - name: id
+          type: string
           in: path
           required: true
-          description: A unique integer value identifying this order.
-          type: string
+          description: order ID
         - name: body
           in: body
           schema:
             $ref: '#/definitions/Order'
       responses:
         '200':
-          description: Successfully updated
+          description: Partial order updated successfully
           schema:
             type: object
             properties:
-              create_a_new_order:
-                $ref: '#/definitions/orders'
+              place_a_new_order:
+                $ref: '#/definitions/orders_link'
               update_this_order:
-                $ref: '#/definitions/specific_order'
+                $ref: '#/definitions/order_link'
+              update_payment_for_this_order:
+                $ref: '#/definitions/order_link'
               cancel_this_order:
-                $ref: '#/definitions/specific_order'
+                $ref: '#/definitions/order_link'
+              lookup_next_order:
+                $ref: '#/definitions/orders_link'
               item:
                 $ref: '#/definitions/Order'
         '400':
-          description: Bad request (Invalid input)
+          description: Bad request (invalid order data)
         '404':
-          description: Order not found
+          description: Order with the provided ID is not found
+        '405':
+          description: Not allowed HTTP method is used
       tags:
-        - order
+        - Order
       consumes:
         - application/json
-        - application/x-www-form-urlencoded
-        - multipart/form-data
       produces:
         - application/json
     delete:
       operationId: destroyOrder
-      description: 'Delete an order by id'
+      description: Delete an order by order ID
       parameters:
         - name: id
+          type: string
           in: path
           required: true
-          description: A unique integer value identifying this order.
-          type: string
+          description: order ID
       responses:
         '204':
-          description: Successfully deleted
+          description: Order deleted successfully
           schema:
             type: object
             properties:
-              create_a_new_order:
-                $ref: '#/definitions/orders'
+              place_a_new_order:
+                $ref: '#/definitions/orders_link'
         '400':
-          description: Bad request (Invalid id)
+          description: Bad request (invalid order ID)
         '404':
-          description: Order not found
+          description: Order with the provided ID is not found
+        '405':
+          description: Not allowed HTTP method is used
       tags:
-        - order
-swagger: '2.0'
+        - Order
 definitions:
   MenuItem:
     type: object
     properties:
       id:
         type: integer
+        example: 1
         readOnly: true
+        description: Menu item ID
       name:
         type: string
         example: Latte
-        description: Menu item name (coffee or addition)
+        description: Menu item name (of a coffee or an addition)
       type:
         enum:
           - coffee
@@ -289,10 +294,12 @@ definitions:
     properties:
       id:
         type: integer
+        example: 1
         readOnly: true
+        description: Order ID
       detail:
         type: string
-        example: 1 Latte
+        example: 1 Latte with skimmed milk
         description: Order detail (coffee and additions)
       clientName:
         type: string
@@ -313,19 +320,19 @@ definitions:
         description: Order status (one of unpaid, cancelled, paid or finished)
       paymentDetail:
         type: string
-        example: Cash
-        description: Order payment detail (Payment method and change)
-  get_menu:
+        example: Cash 5 dollar note
+        description: Order payment detail (payment method and change)
+  menu_link:
     type: string
     format: uri
     x-nullable: true
     example: '/v1/menu'
-  orders:
+  orders_link:
     type: string
     format: uri
     x-nullable: true
     example: '/v1/orders'
-  specific_order:
+  order_link:
     type: string
     format: uri
     x-nullable: true
