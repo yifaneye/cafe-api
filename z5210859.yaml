@@ -57,8 +57,10 @@ paths:
             properties:
               place_an_order:
                 $ref: '#/definitions/orders_link'
-            items:
-              $ref: '#/definitions/MenuItem'
+              results:
+                type: array
+                items:
+                  $ref: '#/definitions/MenuItem'
         '400':
           description: Bad request
         '405':
